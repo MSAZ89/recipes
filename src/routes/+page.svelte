@@ -127,6 +127,12 @@
 	}
 </script>
 
+<title>{recipe.name} Recipe - Share Your Recipe Easily Online!</title>
+<meta
+	name="description"
+	content="Share your recipe online with a simple and easy-to-use recipe editor. Add ingredients and instructions, and share the link with your friends!"
+/>
+
 <Dialog.Root onOpenChange={(open) => (dialogOpen = open)}>
 	<Dialog.Trigger>
 		<Button class="m-2 rounded-none border border-white">Edit Recipe</Button>
