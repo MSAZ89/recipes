@@ -138,14 +138,14 @@
 				<Input type="text" placeholder="Recipe name" bind:value={recipe.name} class="mb-8" />
 				<div class="items-start justify-start gap-4 *:w-full lg:flex">
 					<div>
-						<div class="flex gap-2">
+						<div class="mb-1 flex gap-2">
 							<Input type="text" placeholder="Add ingredient" bind:value={newIngredient} />
 							<Button onclick={addIngredient}>Add</Button>
 						</div>
 						<ol bind:this={ingredientsList} class="list-decimal space-y-2">
 							{#each recipe.ingredients as ingredient, i (ingredient + i)}
 								<li
-									class="flex select-none items-center justify-between rounded-md bg-secondary/20 px-2 text-left"
+									class="flex select-none items-center justify-between rounded-md bg-secondary/60 px-2 text-left"
 								>
 									<div class="flex flex-1 items-start gap-1">
 										<span class="handle cursor-move select-none">⋮⋮</span>
@@ -184,14 +184,14 @@
 						</ol>
 					</div>
 					<div class="mt-8 lg:mt-0">
-						<div class="flex gap-2">
+						<div class="mb-1 flex gap-2">
 							<Input type="text" placeholder="Add instruction" bind:value={newInstruction} />
 							<Button onclick={addInstruction}>Add</Button>
 						</div>
 						<ol bind:this={instructionsList} class="list-decimal space-y-2">
 							{#each recipe.instructions as instruction, i (instruction + i + key)}
 								<li
-									class="flex select-none items-center justify-between rounded-md bg-secondary/20 px-2 text-left"
+									class="flex select-none items-center justify-between rounded-md bg-secondary/60 px-2 text-left"
 								>
 									<div class="flex flex-1 items-start gap-1">
 										<span class="handle cursor-move select-none">⋮⋮</span>
