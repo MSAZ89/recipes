@@ -93,7 +93,7 @@
 			newIngredient = '';
 		}
 	}
-	function truncateWords(text: string, wordCount: number = 5): string {
+	function truncateWords(text: string, wordCount: number = 10): string {
 		const words = text.split(' ');
 		if (words.length <= wordCount) return text;
 		return words.slice(0, wordCount).join(' ') + '...';
