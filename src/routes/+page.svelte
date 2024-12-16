@@ -144,6 +144,19 @@
 			toast.error('Failed to copy URL');
 		}
 	}
+
+	function resetRecipe() {
+		// Clear recipe state
+		recipe.name = '';
+		recipe.instructions = [];
+		recipe.ingredients = [];
+
+		// Reset URL to base
+		window.history.replaceState({}, '', '/');
+
+		// Show success toast
+		toast.success('Recipe cleared!');
+	}
 </script>
 
 <title>{recipe.name} Recipe - Share Your Recipe Easily Online!</title>
@@ -165,6 +178,9 @@
 			Recipe
 		</Button>
 	</Dialog.Trigger>
+	{#if recipe.name !== ''}
+		<Button onclick={resetRecipe} class="m-2 rounded-none border border-white">Clear</Button>
+	{/if}
 	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white">Copy URL</Button>
 	<Dialog.Content class="max-h-screen w-full min-w-full max-w-full overflow-y-auto">
 		<Dialog.Header class="bg-black/2 mx-auto flex w-full items-center justify-between">
