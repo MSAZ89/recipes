@@ -42,7 +42,8 @@
 	"dependencies": {
 		"@tailwindcss/typography": "^0.5.15",
 		"@types/sortablejs": "^1.15.8",
-		"sortablejs": "^1.15.6"
+		"sortablejs": "^1.15.6",
+		"svelte-sonner": "^0.3.28"
 	},
 	"engines": {
 		"node": "20.x"

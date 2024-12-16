@@ -5,6 +5,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import { recipe } from '$lib/stores/recipeStore.svelte';
 	import Sortable from 'sortablejs';
+	import { Toaster, toast } from 'svelte-sonner';
 
 	//instructions management
 	let newInstruction = $state('');
@@ -18,7 +19,7 @@
 	let editingIngredientIndex = $state<number | null>(null);
 	let editingIngredientText = $state('');
 
-	// Editing state
+	// keeping track of instruction editing state and text
 	let editingIndex = $state<number | null>(null);
 	let editingText = $state('');
 
@@ -28,6 +29,9 @@
 		recipe.name = params.get('name') || '';
 		recipe.instructions = JSON.parse(params.get('instructions') || '[]');
 		recipe.ingredients = JSON.parse(params.get('ingredients') || '[]');
+		if (recipe.name !== '') {
+			toast.success('Recipe loaded from URL!');
+		}
 	});
 
 	// Sync to URL when recipe changes
@@ -53,6 +57,7 @@
 					newArray.splice(evt.newIndex!, 0, removed);
 					recipe.instructions = newArray;
 					key++; // Force re-render of list
+					toast.success('Instructions reordered!');
 				}
 			});
 
@@ -73,6 +78,7 @@
 					const [removed] = items.splice(evt.oldIndex!, 1);
 					items.splice(evt.newIndex!, 0, removed);
 					recipe.ingredients = items;
+					toast.success('Ingredients reordered!');
 				}
 			});
 
@@ -83,6 +89,7 @@
 	function addInstruction() {
 		if (newInstruction.trim()) {
 			recipe.instructions = [...recipe.instructions, newInstruction.trim()];
+			toast.success('Instruction ' + newInstruction.trim() + ' added!');
 			newInstruction = '';
 		}
 	}
@@ -90,6 +97,7 @@
 	function addIngredient() {
 		if (newIngredient.trim()) {
 			recipe.ingredients = [...recipe.ingredients, newIngredient.trim()];
+			toast.success('Ingredient ' + newIngredient.trim() + ' added!');
 			newIngredient = '';
 		}
 	}
@@ -108,6 +116,7 @@
 			const newInstructions = [...recipe.instructions];
 			newInstructions[editingIndex] = editingText;
 			recipe.instructions = newInstructions;
+			toast.success('Updated ' + editingText);
 			editingIndex = null;
 		}
 	}
@@ -122,7 +131,17 @@
 			const newIngredients = [...recipe.ingredients];
 			newIngredients[editingIngredientIndex] = editingIngredientText;
 			recipe.ingredients = newIngredients;
+			toast.success('Updated ' + editingIngredientText);
 			editingIngredientIndex = null;
+		}
+	}
+
+	async function shareRecipe() {
+		try {
+			await navigator.clipboard.writeText(window.location.href);
+			toast.success("Link copied! Don't forget to BOOKMARK! Press Ctrl+D (Cmd+D on Mac)");
+		} catch (err) {
+			toast.error('Failed to copy URL');
 		}
 	}
 </script>
@@ -137,6 +156,7 @@
 	<Dialog.Trigger>
 		<Button class="m-2 rounded-none border border-white">Edit Recipe</Button>
 	</Dialog.Trigger>
+	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white">Share/Save</Button>
 	<Dialog.Content class="max-h-screen w-full min-w-full max-w-full overflow-y-auto">
 		<Dialog.Header class="bg-black/2 mx-auto flex w-full items-center justify-between">
 			<Dialog.Title class="mb-4">Recipe</Dialog.Title>
@@ -242,7 +262,9 @@
 </Dialog.Root>
 
 <div class="mx-auto max-w-2xl space-y-4 rounded-xl bg-white/10 p-4 text-white lg:p-12">
-	<h1 class="text-2xl font-bold">{recipe.name}</h1>
+	<h1 class="text-2xl font-bold">
+		{#if recipe.name !== ''}{recipe.name} Recipe{/if}
+	</h1>
 
 	{#if recipe.ingredients.length}
 		<div class="prose">
@@ -266,3 +288,4 @@
 		</div>
 	{/if}
 </div>
+<Toaster />
