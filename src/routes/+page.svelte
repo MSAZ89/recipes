@@ -30,7 +30,7 @@
 		recipe.instructions = JSON.parse(params.get('instructions') || '[]');
 		recipe.ingredients = JSON.parse(params.get('ingredients') || '[]');
 		if (recipe.name !== '') {
-			toast.success('Recipe loaded from URL!');
+			toast.success(recipe.name + ' Recipe Loaded!');
 		}
 	});
 
