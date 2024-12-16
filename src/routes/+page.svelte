@@ -155,7 +155,15 @@
 <Dialog.Root onOpenChange={(open) => (dialogOpen = open)}>
 	<p class="mx-2 mt-1">Send to a friend by sharing the website link/url!</p>
 	<Dialog.Trigger>
-		<Button class="m-2 rounded-none border border-white">Edit Recipe</Button>
+		<Button class="m-2 rounded-none border border-white">
+			{#if recipe.name !== ''}
+				Edit
+			{:else}
+				Create
+			{/if}
+
+			Recipe
+		</Button>
 	</Dialog.Trigger>
 	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white">Copy URL</Button>
 	<Dialog.Content class="max-h-screen w-full min-w-full max-w-full overflow-y-auto">
