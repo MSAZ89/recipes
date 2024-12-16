@@ -193,7 +193,9 @@
 	{#if recipe.name !== ''}
 		<Button onclick={resetRecipe} class="m-2 rounded-none border border-white">Clear</Button>
 	{/if}
-	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white">Copy URL</Button>
+	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white"
+		>Generate Short URL</Button
+	>
 	<Dialog.Content class="max-h-screen w-full min-w-full max-w-full overflow-y-auto">
 		<Dialog.Header class="bg-black/2 mx-auto flex w-full items-center justify-between">
 			<Dialog.Title class="mb-4">Recipe</Dialog.Title>
