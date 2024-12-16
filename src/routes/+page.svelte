@@ -7,6 +7,9 @@
 	import Sortable from 'sortablejs';
 	import { Toaster, toast } from 'svelte-sonner';
 
+	//state for short url
+	let feShortUrl = $state('');
+
 	//instructions management
 	let newInstruction = $state('');
 	let instructionsList: HTMLElement;
@@ -145,6 +148,7 @@
 
 			if (response.ok) {
 				const shortUrl = await response.text();
+				feShortUrl = shortUrl;
 				await navigator.clipboard.writeText(shortUrl);
 				toast.success("Short URL copied! Don't forget to BOOKMARK! Press Ctrl+D or Cmd+D on Mac");
 			} else {
@@ -199,6 +203,11 @@
 	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white"
 		>Generate Short URL</Button
 	>
+	{#if feShortUrl !== ''}
+		<div>
+			<a href={feShortUrl} target="_blank" class="mx-2 mt-1 text-sm text-green-400">{feShortUrl}</a>
+		</div>
+	{/if}
 	<Dialog.Content class="max-h-screen w-full min-w-full max-w-full overflow-y-auto">
 		<Dialog.Header class="bg-black/2 mx-auto flex w-full items-center justify-between">
 			<Dialog.Title class="mb-4">Recipe</Dialog.Title>
