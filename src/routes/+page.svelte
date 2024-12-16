@@ -287,8 +287,10 @@
 </Dialog.Root>
 
 <div class="mx-auto max-w-2xl space-y-4 rounded-xl bg-white/10 p-4 text-white lg:p-12">
-	<h1 class="text-2xl font-bold">
+	<h1 class="mx-auto text-center text-2xl font-bold">
 		{#if recipe.name !== ''}{recipe.name} Recipe{/if}
+		{#if recipe.name === ''}Click "Create Recipe" to get started!
+		{/if}
 	</h1>
 
 	{#if recipe.ingredients.length}
