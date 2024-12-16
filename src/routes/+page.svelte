@@ -205,7 +205,7 @@
 	>
 	{#if feShortUrl !== ''}
 		<div>
-			<a href={feShortUrl} target="_blank" class="mx-2 mt-1 text-sm text-green-400">{feShortUrl}</a>
+			<a href={feShortUrl} target="_blank" class="mx-2 mt-1 text-sm text-pink-400">{feShortUrl}</a>
 		</div>
 	{/if}
 	<Dialog.Content class="max-h-screen w-full min-w-full max-w-full overflow-y-auto">
