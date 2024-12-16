@@ -178,7 +178,10 @@
 />
 
 <Dialog.Root onOpenChange={(open) => (dialogOpen = open)}>
-	<p class="mx-2 mt-1">Send to a friend by sharing the website link/url!</p>
+	<p class="mx-2 mt-1 text-sm text-green-400">Send to a friend by sharing the website link/url!</p>
+	<p class="mx-2 mt-1 text-sm">
+		<span class="text-yellow-500">WARNING</span> - Save/Bookmark your recipe URL before clearing.
+	</p>
 	<Dialog.Trigger>
 		<Button class="m-2 rounded-none border border-white">
 			{#if recipe.name !== ''}
