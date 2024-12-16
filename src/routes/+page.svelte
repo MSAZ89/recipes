@@ -138,10 +138,22 @@
 
 	async function shareRecipe() {
 		try {
-			await navigator.clipboard.writeText(window.location.href);
-			toast.success("URL copied! Don't forget to BOOKMARK! Press Ctrl+D or Cmd+D on Mac");
+			const longUrl = window.location.href;
+			const response = await fetch(
+				`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`
+			);
+
+			if (response.ok) {
+				const shortUrl = await response.text();
+				await navigator.clipboard.writeText(shortUrl);
+				toast.success("Short URL copied! Don't forget to BOOKMARK! Press Ctrl+D or Cmd+D on Mac");
+			} else {
+				throw new Error('Failed to shorten URL');
+			}
 		} catch (err) {
-			toast.error('Failed to copy URL');
+			// Fallback to copying long URL if shortening fails
+			await navigator.clipboard.writeText(window.location.href);
+			toast.error('Failed to shorten URL, copied full URL instead');
 		}
 	}
 
