@@ -139,7 +139,7 @@
 	async function shareRecipe() {
 		try {
 			await navigator.clipboard.writeText(window.location.href);
-			toast.success("Link copied! Don't forget to BOOKMARK! Press Ctrl+D (Cmd+D on Mac)");
+			toast.success("URL copied! Don't forget to BOOKMARK! Press Ctrl+D or Cmd+D on Mac");
 		} catch (err) {
 			toast.error('Failed to copy URL');
 		}
@@ -153,10 +153,11 @@
 />
 
 <Dialog.Root onOpenChange={(open) => (dialogOpen = open)}>
+	<p class="mx-2 mt-1">Send to a friend by sharing the website link/url!</p>
 	<Dialog.Trigger>
 		<Button class="m-2 rounded-none border border-white">Edit Recipe</Button>
 	</Dialog.Trigger>
-	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white">Share/Save</Button>
+	<Button onclick={shareRecipe} class="m-2 rounded-none border border-white">Copy URL</Button>
 	<Dialog.Content class="max-h-screen w-full min-w-full max-w-full overflow-y-auto">
 		<Dialog.Header class="bg-black/2 mx-auto flex w-full items-center justify-between">
 			<Dialog.Title class="mb-4">Recipe</Dialog.Title>
